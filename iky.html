@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iky Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://iili.io/K7RYmDx.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20, 20, 30, 0.85);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 25px rgba(100, 70, 200, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 70, 200, 0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #6446c8;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #8a6de9;
+            text-shadow: 0 0 10px rgba(138, 109, 233, 0.7);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a89cc8;
+            margin-bottom: 20px;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #6446c8, #8a6de9);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(100, 70, 200, 0.5);
+        }
+        
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+        
+        .menu-item {
+            background: rgba(40, 35, 60, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #8a6de9;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateX(5px);
+            background: rgba(50, 45, 75, 0.8);
+        }
+        
+        .menu-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .payment-option {
+            background: rgba(40, 35, 60, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #64c876;
+        }
+        
+        .payment-option.unavailable {
+            border-left: 4px solid #c86464;
+            opacity: 0.7;
+        }
+        
+        .payment-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .payment-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .payment-number {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .wa-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wa-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .menu-item, .payment-option {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .payment-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Iky Payment</h1>
+            <p class="subtitle">Layanan Pembayaran Digital Terpercaya</p>
+        </header>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="showPage('menu-page')">Menu</button>
+            <button class="nav-btn" onclick="showPage('payment-page')">Pembayaran</button>
+        </div>
+        
+        <div id="menu-page" class="page active">
+            <h2>Daftar Menu</h2>
+            
+            <div class="menu-item">
+                <div class="menu-name">Panel dan ADP Owner Panel DLL</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">SC Dapzy</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">Jasteb</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">Murgacha Nokos WA</div>
+            </div>
+        </div>
+        
+        <div id="payment-page" class="page">
+            <h2>Metode Pembayaran</h2>
+            
+            <div class="payment-option">
+                <div class="payment-info">
+                    <div class="payment-icon" style="color: #0080ff;">
+                        <i class="fab fa-dana"></i>
+                    </div>
+                    <div class="payment-name">DANA</div>
+                </div>
+                <div class="payment-number">081214247373</div>
+            </div>
+            
+            <div class="payment-option unavailable">
+                <div class="payment-info">
+                    <div class="payment-icon" style="color: #673ab7;">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="payment-name">OVO</div>
+                </div>
+                <div class="payment-number">Tidak Tersedia</div>
+            </div>
+            
+            <div class="payment-option unavailable">
+                <div class="payment-info">
+                    <div class="payment-icon" style="color: #00a65e;">
+                        <i class="fab fa-google-wallet"></i>
+                    </div>
+                    <div class="payment-name">Gopay</div>
+                </div>
+                <div class="payment-number">Tidak Tersedia</div>
+            </div>
+            
+            <div class="payment-option unavailable">
+                <div class="payment-info">
+                    <div class="payment-icon" style="color: #ff6b00;">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="payment-name">QRIS</div>
+                </div>
+                <div class="payment-number">Tidak Tersedia</div>
+            </div>
+            
+            <a href="https://wa.me/6285797933331" class="wa-button">
+                <i class="fab fa-whatsapp"></i> Hubungi Penjual via WhatsApp
+            </a>
+        </div>
+        
+        <div class="footer">
+            &copy; 2025 Iky Payment - Layanan Pembayaran Digital
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Tampilkan halaman yang dipilih
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
